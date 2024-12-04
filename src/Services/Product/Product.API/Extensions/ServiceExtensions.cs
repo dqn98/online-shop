@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contracts.Common.Interfaces;
+using Infrastructure.Common;
+using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistences;
+using Product.API.Repositories;
+using Product.API.Repositories.Interfaces;
 
 namespace Product.API.Extensions;
 
@@ -13,6 +17,7 @@ public static class ServiceExtensions
         services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
         // config swagger
         services.AddEndpointsApiExplorer();
+        services.AddInfrastructureServices();
         services.ConfigureProductDbContext(configuration);
 
         return services;
@@ -31,6 +36,16 @@ public static class ServiceExtensions
                 e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
             }));
 
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>));
+        services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+        
+        services.AddTransient(typeof(IProductRepository), typeof(ProductRepository));
+        
         return services;
     }
 }
