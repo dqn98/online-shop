@@ -17,7 +17,7 @@ public static class HostExtensions
                 logger.LogInformation("Migrating mysql database");
                 ExecuteMigrations(context);
                 logger.LogInformation("Migrated mysql database");
-                InvokeSeeder(seeder, context, services);
+                InvokeSeeder(seeder!, context, services);
             }
             catch (Exception ex)
             {
@@ -28,13 +28,14 @@ public static class HostExtensions
         return host;
     }
     private static void ExecuteMigrations<TContext>(TContext context)
-        where TContext : DbContext
+        where TContext : DbContext?
     {
+        ArgumentNullException.ThrowIfNull(context);
         context.Database.Migrate();
     }
 
     private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext context, IServiceProvider services)
-        where TContext : DbContext
+        where TContext : DbContext?
     {
         seeder(context, services);
     }

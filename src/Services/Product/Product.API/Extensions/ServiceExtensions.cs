@@ -1,4 +1,5 @@
-﻿using Contracts.Common.Interfaces;
+﻿using AutoMapper;
+using Contracts.Common.Interfaces;
 using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
@@ -19,7 +20,8 @@ public static class ServiceExtensions
         services.AddEndpointsApiExplorer();
         services.AddInfrastructureServices();
         services.ConfigureProductDbContext(configuration);
-
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        
         return services;
     }
     
