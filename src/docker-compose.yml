@@ -7,7 +7,7 @@ services:
     image: mysql:9.1.0
   
   customerdb:
-    image: postgres:alpine3.16
+    image: postgres:alpine3.20
   
   basketdb:
     image: redis:alpine
@@ -32,11 +32,11 @@ services:
     image: docker.elastic.co/kibana/kibana:7.17.2
   
   #microservices api section
-  product.api:
-    image: ${DOCKER_REGISTRY-}product-api:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: Services/Product.API/Dockerfile
+#  product.api:
+#    image: ${DOCKER_REGISTRY-}product-api:${PLATFORM:-linux}-${TAG:-latest}
+#    build:
+#      context: .
+#      dockerfile: Services/Product.API/Dockerfile
 
 #network section
 networks:
