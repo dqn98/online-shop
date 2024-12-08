@@ -10,7 +10,7 @@ namespace Basket.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public sealed class BasketController : Controller
+public class BasketController : Controller
 {
     private readonly IBasketRepository _basketRepository;
     private readonly ILogger _logger;
@@ -30,6 +30,7 @@ public sealed class BasketController : Controller
 
 
     [HttpGet("{username}", Name = "GetBasket")]
+    [Route("api/basket/{username}")]
     public async Task<ActionResult<Cart>> GetBasketByUsername([Required] string username)
     {
         var result = await _basketRepository.GetBasketByUserName(username);
