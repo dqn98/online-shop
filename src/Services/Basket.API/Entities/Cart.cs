@@ -2,13 +2,13 @@
 
 public class Cart
 {
-    public string Username { get; set; }
-    private List<CartItem> Items { get; set; } = new List<CartItem>();
+    public string UserName { get; set; }
+    public List<CartItem> Items { get; set; } = new();
     
     public Cart() {}
     public Cart(string userName)
     {
-        Username = userName;
+        UserName = userName;
     }
 
     public decimal TotalPrice => Items.Sum(item => item.ItemPrice * item.Quantity);

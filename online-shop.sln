@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Domain", "src\Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "src\Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{40E180EC-CBD0-4349-9035-7C8FBDA4119A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "src\BuildingBlocks\EventBus\EventBus.Messages\EventBus.Messages.csproj", "{E22159C5-D1A3-4931-B64F-901471346CD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,7 @@ Global
 		{2FCC75D8-9A95-4F39-B988-0AF9707D2B5A} = {AAA407F0-8A55-40BF-BBBE-31D9BFF8D2B4}
 		{49D12A32-2433-44A0-9001-FA77FAA48BF7} = {AAA407F0-8A55-40BF-BBBE-31D9BFF8D2B4}
 		{40E180EC-CBD0-4349-9035-7C8FBDA4119A} = {AAA407F0-8A55-40BF-BBBE-31D9BFF8D2B4}
+		{E22159C5-D1A3-4931-B64F-901471346CD6} = {54193816-497E-410B-A656-E671757FDB48}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0597E8AF-3089-4423-9F72-F94F553D9B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -127,5 +130,9 @@ Global
 		{40E180EC-CBD0-4349-9035-7C8FBDA4119A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E180EC-CBD0-4349-9035-7C8FBDA4119A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40E180EC-CBD0-4349-9035-7C8FBDA4119A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E22159C5-D1A3-4931-B64F-901471346CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E22159C5-D1A3-4931-B64F-901471346CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E22159C5-D1A3-4931-B64F-901471346CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E22159C5-D1A3-4931-B64F-901471346CD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
