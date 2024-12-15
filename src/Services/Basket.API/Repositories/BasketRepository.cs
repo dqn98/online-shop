@@ -37,18 +37,18 @@ public class BasketRepository : IBasketRepository
         if (options != null)
         {
             await _redisCache.SetStringAsync(
-                cart.Username, 
+                cart.UserName, 
                 _serializeService.Serialize(cart), 
                 options);
         }
         else
         {
             await _redisCache.SetStringAsync(
-                cart.Username, 
+                cart.UserName, 
                 _serializeService.Serialize(cart));
         }
 
-        return await GetBasketByUserName(cart.Username);
+        return await GetBasketByUserName(cart.UserName);
     }
 
     public async Task<bool> DeleteBasketFromUsername(string username)
