@@ -27,5 +27,5 @@ public class Order : EntityAuditBase<long>
     [Column(TypeName = "NVARCHAR(250)")]
     public string? InvoiceAddress { get; set; }
     
-    public EOrderStatus Status { get; set; }
+    public EOrderStatus Status { get; set; } = EOrderStatus.New;
 }

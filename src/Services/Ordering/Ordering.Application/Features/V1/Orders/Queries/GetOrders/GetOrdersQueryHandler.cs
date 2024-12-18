@@ -27,12 +27,10 @@ public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, ApiResult<L
         _logger = logger;
     }
     
-    private const string MethodName = "GetOrdersQueryHandler";
-    
     public async Task<ApiResult<List<OrderDto>>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
         _logger.Information("Begin: GetOrders request: {@Request}", request);
-        var orderEntities = await _orderRepository.GetOrdersByUserNameAsync(request.Username);
+        var orderEntities = await _orderRepository.GetOrdersByUserNameAsync(request.UserName);
         var orderList = _mapper.Map<List<OrderDto>>(orderEntities);
         
         _logger.Information("End: GetOrders request: {@Request}", request);

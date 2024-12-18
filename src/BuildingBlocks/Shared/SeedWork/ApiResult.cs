@@ -3,34 +3,22 @@
 public class ApiResult<T>
 {
     public ApiResult()
+    { }
+
+    public ApiResult(bool isSucceeded, string message = null)
     {
-    }
-    
-    public ApiResult(bool isSuccess)
-    {
-        IsSuccess = isSuccess;
-    }
-    
-    public ApiResult(bool isSuccess, T data)
-    {
-        IsSuccess = isSuccess;
-        Data = data;
+        Message = message;
+        IsSucceeded = isSucceeded;
     }
 
-    public ApiResult(bool isSuccess, string message)
-    {   
-        IsSuccess = isSuccess;
+    public ApiResult(bool isSucceeded, T data, string message = null)
+    {
+        Data = data;
+        IsSucceeded = isSucceeded;
         Message = message;
     }
 
-    public ApiResult(bool isSuccess, T data, string message)
-    {
-        Data = data;
-        IsSuccess = isSuccess;
-        Message = message;
-    }
-    
-    public bool IsSuccess { get; set; }
+    public bool IsSucceeded { get; set; }
     public string Message { get; set; }
     public T Data { get; }
 }

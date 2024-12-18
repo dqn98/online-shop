@@ -40,6 +40,8 @@ public class MappingProfile
                 foreach (var @interface in interfaces)
                 {
                     var interfaceMethodInfo = @interface.GetMethod(mappingMethodName, argumentTypes);
+                    ArgumentNullException.ThrowIfNull(interfaceMethodInfo);
+                    
                     interfaceMethodInfo.Invoke(instance, new object?[]{this});
                 }
             }
