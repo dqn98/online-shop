@@ -6,11 +6,12 @@ namespace Ordering.Application.Features.V1.Orders;
 
 public class GetOrdersQuery : IRequest<ApiResult<List<OrderDto>>>
 {
-    public string Username { get; private set; }
+    public string UserName { get; private set; }
 
-    public GetOrdersQuery(string username)
+    public GetOrdersQuery(string userName)
     {
-        if (string.IsNullOrEmpty(username))
-            throw new ArgumentNullException(nameof(username));
+        if (string.IsNullOrEmpty(userName))
+            throw new ArgumentNullException(nameof(userName));
+        UserName = userName;
     }
 }

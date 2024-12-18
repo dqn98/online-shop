@@ -1,6 +1,6 @@
 ﻿namespace Shared.SeedWork;
 
-public class ApiSuccessResult<T> : ApiResult<T>  
+public class ApiSuccessResult<T> : ApiResult<T>
 {
     public ApiSuccessResult(T data) : base(true, data, "Success")
     {
