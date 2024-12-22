@@ -1,6 +1,8 @@
-﻿namespace EventBus.Messages;
+﻿using MediatR;
 
-public record IntegrationBaseEvent() : IIntergrationEvent
+namespace EventBus.Messages;
+
+public abstract record IntegrationBaseEvent() : IIntegrationEvent
 {
     public DateTime CreationDate { get; } = DateTime.UtcNow;
     

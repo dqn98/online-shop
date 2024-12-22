@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Basket.API.Entities;
-using EventBus.Messages.IntegrationEvents.Events.Basket;
+using EventBus.Messages.IntegrationEvents.Events;
 
 namespace Basket.API;
 
