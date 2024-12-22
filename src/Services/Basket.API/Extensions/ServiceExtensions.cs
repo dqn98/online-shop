@@ -1,7 +1,7 @@
 ﻿using Basket.API.Repositories;
 using Basket.API.Repositories.Interfaces;
 using Contracts.Common.Interfaces;
-using EventBus.Messages.IntegrationEvents.Interfaces.Basket;
+using EventBus.Messages.IntegrationEvents.Events;
 using Infrastructure.Common;
 using Infrastructure.Extensions;
 using MassTransit;

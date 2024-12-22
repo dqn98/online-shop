@@ -37,7 +37,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Api
         var orderEntity = _mapper.Map<Order>(request);
         var addedOrder = await _orderRepository.CreateOrderAsync(orderEntity);
         await _orderRepository.SaveChangesAsync();
-        
+        orderEntity.AddedOrder();
         _logger.Information($"Order: {addedOrder.Id} has been created");
         
         return new ApiSuccessResult<long>(addedOrder.Id);

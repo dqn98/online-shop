@@ -14,8 +14,13 @@ public class UpdateOrderCommand : CreateOrUpdateCommand, IRequest<ApiResult<Orde
     
     public void SetId(long id) => Id = id;
 
-    public void MappingProfile(Profile profile) => profile.CreateMap<UpdateOrderCommand, Order>()
-        .ForMember(dest => dest.Status, opts => opts.Ignore())
-        .IgnoreAllNonExisting();
-    
+    private new class Mapping : Profile
+    {
+        public Mapping()
+        {
+            CreateMap<UpdateOrderCommand, Order>()
+                .ForMember(dest => dest.Status, opts => opts.Ignore())
+                .IgnoreAllNonExisting();
+        }
+    }
 }

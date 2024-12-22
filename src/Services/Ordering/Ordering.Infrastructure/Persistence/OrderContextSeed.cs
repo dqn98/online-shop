@@ -61,7 +61,8 @@ public class OrderContextSeed
                     EmailAddress = "customer1@local.com",
                     ShippingAddress = "Wollongong",
                     InvoiceAddress = "Australia",
-                    TotalPrice = 250
+                    TotalPrice = 250,
+                    DocumentNo = new Guid().ToString()
                 });
         }
     }

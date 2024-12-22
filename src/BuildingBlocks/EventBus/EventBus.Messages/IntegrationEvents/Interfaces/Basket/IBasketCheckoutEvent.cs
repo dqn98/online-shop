@@ -1,6 +1,6 @@
-﻿namespace EventBus.Messages.IntegrationEvents.Interfaces.Basket;
+﻿namespace EventBus.Messages.IntegrationEvents.Events;
 
-public interface IBasketCheckoutEvent
+public interface IBasketCheckoutEvent : IIntegrationEvent
 {
     public string UserName { get; set; }
     

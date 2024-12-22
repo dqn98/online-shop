@@ -1,21 +1,23 @@
 ﻿using AutoMapper;
-using EventBus.Messages.IntegrationEvents.Events.Basket;
+using EventBus.Messages.IntegrationEvents.Events;
 using MediatR;
 using Ordering.Application.Common.Mapping;
-using Ordering.Application.Common.Models;
 using Ordering.Domain.Entities;
 using Shared.SeedWork;
 
 namespace Ordering.Application.Features.V1.Orders;
 
-public class CreateOrderCommand : CreateOrUpdateCommand, 
-    IRequest<ApiResult<long>>, IMapFrom<Order>, IMapFrom<BasketCheckoutEvent>
+public class CreateOrderCommand : CreateOrUpdateCommand, IRequest<ApiResult<long>>, IMapFrom<Order>,
+    IMapFrom<BasketCheckoutEvent>
 {
-    public required string UserName { get; set; }
-
-    public void Mapping(Profile profile)
+    public string? UserName { get; set; }
+    
+    public new class Mapping : Profile
     {
-        profile.CreateMap<CreateOrderCommand, Order>();
-        profile.CreateMap<BasketCheckoutEvent, CreateOrUpdateCommand>();
+        public Mapping()
+        {
+            CreateMap<CreateOrderCommand, Order>();
+            CreateMap<BasketCheckoutEvent, CreateOrderCommand>();
+        }
     }
 }
