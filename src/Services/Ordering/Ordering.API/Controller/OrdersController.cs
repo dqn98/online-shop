@@ -24,11 +24,15 @@ private readonly ILogger _logger;
         _mediator = mediator;
         _logger = logger;
     }
-    
-     private static class RouteNames
-     {
-         public const string GetOrders = nameof(GetOrders);
-     }
+    private static class RouteNames
+    {
+        public const string GetOrders = nameof(GetOrders);
+        // public const string GetOrder = nameof(GetOrder);
+        // public const string CreateOrder = nameof(CreateOrder);
+        // public const string UpdateOrder = nameof(UpdateOrder);
+        public const string DeleteOrder = nameof(DeleteOrder);
+        // public const string DeleteOrderByDocumentNo = nameof(DeleteOrderByDocumentNo);
+    }
 
      [HttpGet("{username}", Name = RouteNames.GetOrders)]
      [ProducesResponseType(typeof(IEnumerable<OrderDto>), (int)HttpStatusCode.OK)]
@@ -38,5 +42,14 @@ private readonly ILogger _logger;
          _logger.Information($"OrderQuery: {query}");
          var result = await _mediator.Send(query);
          return Ok(result);
+     }
+     
+     [HttpDelete("{id:long}", Name = RouteNames.DeleteOrder)]
+     [ProducesResponseType(typeof(NoContentResult), (int)HttpStatusCode.NoContent)]
+     public async Task<ActionResult> DeleteOrder([Required] long id)
+     {
+         var command = new DeleteOrderCommand(id);
+         await _mediator.Send(command);
+         return NoContent();
      }
 }
