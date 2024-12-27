@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using Infrastructure.Extensions;
+using Inventory.API.Services;
+using Inventory.API.Services.Interfaces;
 using MongoDB.Driver;
 
 namespace Inventory.API.Extensions;
@@ -43,6 +45,8 @@ public static class ServiceExtensions
         services.AddAuthorization();
         services.AddControllers();
         services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
+
+        services.AddScoped<IInventoryService, InventoryService>();
         return services;
     }
 }

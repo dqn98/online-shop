@@ -1,9 +1,11 @@
 ﻿using Inventory.API.Entities.Abstractions;
+using Inventory.API.Extensions;
 using MongoDB.Bson.Serialization.Attributes;
 using Shared.Enums.Inventory;
 
 namespace Inventory.API.Entities;
 
+[BsonCollection("Inventories")]
 public class InventoryEntry : MongoEntity
 {
     public InventoryEntry()
@@ -24,7 +26,7 @@ public class InventoryEntry : MongoEntity
     public string ItemNo { get; set; }
     
     [BsonElement("quantity")]
-    public int Quantity { get; set; }
+    public double Quantity { get; set; }
     
     [BsonElement("externalDocumentNo")]
     public string ExternalDocumentNo { get; set; }
