@@ -2,7 +2,7 @@
 
 public class PagingRequestParameters
 {
-    private const int maxPageSize = 50;
+    private const int MaxPageSize = 50;
     private int _pageNumber = 1;
     private int _pageSize = 10;
 
@@ -18,9 +18,9 @@ public class PagingRequestParameters
         set
         {
             if (value > 0)
-                _pageSize = value > maxPageSize ? maxPageSize : value;
+                _pageSize = value > MaxPageSize ? MaxPageSize : value;
         }
     }
 
-    public string OrderBy { get; set; }
+    public string? OrderBy { get; set; }
 }

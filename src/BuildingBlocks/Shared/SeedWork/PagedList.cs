@@ -4,7 +4,7 @@ public class PagedList<T> : List<T>
 {
     public PagedList(IEnumerable<T> items, long totalItems, int pageNumber, int pageSize)
     {
-        _metaData = new MetaData
+        MetaData = new MetaData
         {
             TotalItems = totalItems,
             PageSize = pageSize,
@@ -15,10 +15,10 @@ public class PagedList<T> : List<T>
         AddRange(items);
     }
 
-    private MetaData _metaData { get; }
+    private MetaData MetaData { get; }
 
     public MetaData GetMetaData()
     {
-        return _metaData;
+        return MetaData;
     }
 }
