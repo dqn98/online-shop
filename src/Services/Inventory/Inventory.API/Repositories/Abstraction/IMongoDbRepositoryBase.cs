@@ -9,5 +9,5 @@ public interface IMongoDbRepositoryBase<T> where T : MongoEntity
     
     Task CreateAsync(T entity, CancellationToken cancellationToken = default);
     Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
-    Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+    Task DeleteAsync(string id, CancellationToken cancellationToken = default);
 }
