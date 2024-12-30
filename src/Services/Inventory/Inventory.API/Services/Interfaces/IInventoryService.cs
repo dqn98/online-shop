@@ -1,5 +1,5 @@
-﻿using Inventory.API.Entities;
-using Inventory.API.Repositories.Abstraction;
+﻿using Contracts.Domains.Interfaces;
+using Inventory.API.Entities;
 using Shared.DTOs.Inventory;
 using Shared.SeedWork;
 

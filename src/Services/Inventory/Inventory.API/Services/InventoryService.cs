@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using Infrastructure.Common.Repositories;
 using Infrastructure.Extensions;
 using Inventory.API.Entities;
-using Inventory.API.Extensions;
-using Inventory.API.Repositories.Abstraction;
 using Inventory.API.Services.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Shared.Configurations;
 using Shared.DTOs.Inventory;
 using Shared.SeedWork;
 
@@ -14,7 +14,7 @@ namespace Inventory.API.Services;
 public class InventoryService : MongoDbRepository<InventoryEntry>, IInventoryService
 {
     private readonly IMapper _mapper;
-    public InventoryService(IMongoClient client, DatabaseSettings databaseSettings, IMapper mapper) : base(client, databaseSettings)
+    public InventoryService(IMongoClient client, MongoDbSettings databaseSettings, IMapper mapper) : base(client, databaseSettings)
     {
         ArgumentNullException.ThrowIfNull(mapper);
         _mapper = mapper;
@@ -22,9 +22,8 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
 
     public async Task<IEnumerable<InventoryEntryDto>> GetAllByItemNoAsync(string itemNo, CancellationToken cancellationToken)
     {
-        var entities = await FindAll()
-            .Find(x=>x.ItemNo.Equals(itemNo))
-            .ToListAsync(cancellationToken);
+        var filter = Builders<InventoryEntry>.Filter.Eq(x => x.ItemNo, itemNo);
+        var entities = await Collection.Find(filter).ToListAsync(cancellationToken);
         
         var result = _mapper.Map<IEnumerable<InventoryEntryDto>>(entities);
         return result;

@@ -3,6 +3,7 @@ using Infrastructure.Extensions;
 using Inventory.API.Services;
 using Inventory.API.Services.Interfaces;
 using MongoDB.Driver;
+using Shared.Configurations;
 
 namespace Inventory.API.Extensions;
 
@@ -12,8 +13,8 @@ public static class ServiceExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var databaseSettings = configuration.GetSection(nameof(DatabaseSettings))
-            .Get<DatabaseSettings>();
+        var databaseSettings = configuration.GetSection(nameof(MongoDbSettings))
+            .Get<MongoDbSettings>();
         
         ArgumentNullException.ThrowIfNull(databaseSettings);
         services.AddSingleton(databaseSettings);
@@ -23,7 +24,7 @@ public static class ServiceExtensions
 
     private static string GetMongoConnectionString(this IServiceCollection services)
     {
-        var settings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
+        var settings = services.GetOptions<MongoDbSettings>(nameof(MongoDbSettings));
         
         ArgumentNullException.ThrowIfNull(settings);
         if(string.IsNullOrEmpty(settings.ConnectionString)) 

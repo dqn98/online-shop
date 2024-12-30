@@ -1,15 +1,17 @@
 ﻿using System.Linq.Expressions;
-using Inventory.API.Entities.Abstractions;
-using Inventory.API.Extensions;
+using Contracts.Domains;
+using Contracts.Domains.Interfaces;
+using Infrastructure.Extensions;
 using MongoDB.Driver;
+using Shared.Configurations;
 
-namespace Inventory.API.Repositories.Abstraction;
+namespace Infrastructure.Common.Repositories;
 
 public class MongoDbRepository<T> : IMongoDbRepositoryBase<T> where T : MongoEntity
 {
     private readonly IMongoDatabase _database;
     
-    public MongoDbRepository(IMongoClient client, DatabaseSettings databaseSettings)
+    public MongoDbRepository(IMongoClient client, MongoDbSettings databaseSettings)
     {
         ArgumentNullException.ThrowIfNull(client);
         ArgumentNullException.ThrowIfNull(databaseSettings);
@@ -48,7 +50,7 @@ public class MongoDbRepository<T> : IMongoDbRepositoryBase<T> where T : MongoEnt
         => Collection.DeleteOneAsync(x => x.Id != null && x.Id.Equals(id.ToString()), 
             cancellationToken: cancellationToken);
     
-    private static string GetCollectionName()
+    protected static string GetCollectionName()
     {
         var collectionAttribute = (BsonCollectionAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(BsonCollectionAttribute))!;
         return collectionAttribute?.CollectionName ?? typeof(T).Name;

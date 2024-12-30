@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Inventory.API.Entities.Abstractions;
+namespace Contracts.Domains;
 
 public abstract class MongoEntity
 {

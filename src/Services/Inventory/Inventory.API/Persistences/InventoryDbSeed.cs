@@ -1,13 +1,14 @@
 ﻿using Inventory.API.Entities;
 using Inventory.API.Extensions;
 using MongoDB.Driver;
+using Shared.Configurations;
 using Shared.Enums.Inventory;
 
 namespace Inventory.API.Persistences;
 
 public class InventoryDbSeed
 {
-    public async Task SeedDataAsync(IMongoClient mongoClient, DatabaseSettings databaseSettings)
+    public async Task SeedDataAsync(IMongoClient mongoClient, MongoDbSettings databaseSettings)
     {
         var databaseName = databaseSettings.DatabaseName;
         var database = mongoClient.GetDatabase(databaseName);
