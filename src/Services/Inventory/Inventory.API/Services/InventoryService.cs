@@ -55,7 +55,7 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
         return result;
     }
 
-    public async Task<InventoryEntryDto> GetByIdAsync(string id, CancellationToken cancellationToken)
+    public async Task<InventoryEntryDto?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         var filter = Builders<InventoryEntry>.Filter.Eq(x => x.Id, id);
         var entity = await Collection.Find(filter).FirstOrDefaultAsync(cancellationToken);

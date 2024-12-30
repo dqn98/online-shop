@@ -44,7 +44,7 @@ public class MongoDbRepository<T> : IMongoDbRepositoryBase<T> where T : MongoEnt
         return Collection.ReplaceOneAsync(filter, entity, cancellationToken: cancellationToken);
     }
 
-    public Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task DeleteAsync(string id, CancellationToken cancellationToken = default)
         => Collection.DeleteOneAsync(x => x.Id != null && x.Id.Equals(id.ToString()), 
             cancellationToken: cancellationToken);
     
