@@ -2,7 +2,7 @@
 
 public class Cart
 {
-    public string UserName { get; set; }
+    public string? UserName { get; set; }
     public List<CartItem> Items { get; set; } = new();
     
     public Cart() {}

@@ -6,4 +6,6 @@ public class CartItem
     public decimal ItemPrice { get; set; }
     public required string ItemNo { get; set; }
     public required string ItemName { get; set; }
+    public double AvailalbeQuantity { get; private set; }
+    public void SetAvailableQuantity (double availableQuantity) => AvailalbeQuantity = availableQuantity;
 }
