@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Infrastructure.Common.Repositories;
+﻿using Infrastructure.Common.Repositories;
 using Inventory.Grpc.Entities;
 using Inventory.Grpc.Repositories.Interfaces;
 using MongoDB.Driver;
