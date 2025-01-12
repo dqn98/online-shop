@@ -60,6 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory.Grpc", "Inventory
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Grpc", "src\Services\Inventory.Grpc\Inventory.Grpc\Inventory.Grpc.csproj", "{9732CBD7-3584-40B2-AB20-BC533D8A1C73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGateway", "OcelotApiGateway\OcelotApiGateway.csproj", "{1A00F3EB-F7DE-4308-A873-BDB5DABA3685}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,7 @@ Global
 		{F0BACB7B-7E50-4095-8600-3275B971A50A} = {6348D1B7-DFB7-496C-BDE3-938F823087FA}
 		{46279F9B-E1C5-4FEE-BCD7-FA0849B7C4C5} = {057D7DE7-B20F-47AD-99D8-8093D2FEC312}
 		{9732CBD7-3584-40B2-AB20-BC533D8A1C73} = {46279F9B-E1C5-4FEE-BCD7-FA0849B7C4C5}
+		{1A00F3EB-F7DE-4308-A873-BDB5DABA3685} = {1B917FF3-8045-492B-87D1-E9E9EF75B19D}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0597E8AF-3089-4423-9F72-F94F553D9B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -154,5 +157,9 @@ Global
 		{9732CBD7-3584-40B2-AB20-BC533D8A1C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9732CBD7-3584-40B2-AB20-BC533D8A1C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9732CBD7-3584-40B2-AB20-BC533D8A1C73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A00F3EB-F7DE-4308-A873-BDB5DABA3685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A00F3EB-F7DE-4308-A873-BDB5DABA3685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A00F3EB-F7DE-4308-A873-BDB5DABA3685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A00F3EB-F7DE-4308-A873-BDB5DABA3685}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
