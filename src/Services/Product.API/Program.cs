@@ -1,6 +1,7 @@
 using Common.Logging;
 using Product.API.Extensions;
 using Product.API.Persistences;
+using Scalar.AspNetCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -24,6 +25,7 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.MapOpenApi();
+        app.MapScalarApiReference();
     }
 
     app.MigrateDatabase<CatalogProductContext>((context, _) =>

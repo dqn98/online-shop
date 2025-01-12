@@ -7,6 +7,6 @@ public class HomeController : Controller
     // GET
     public IActionResult Index()
     {
-        return View();
+        return Redirect("~/scalar/v1");
     }
 }
