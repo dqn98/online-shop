@@ -17,7 +17,6 @@
         <PackageReference Include="MySqlConnector" Version="2.4.0" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
         <PackageReference Include="Scalar.AspNetCore" Version="1.2.75" />
-        <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0-dev-02303" />
     </ItemGroup>
 
     <ItemGroup>

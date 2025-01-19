@@ -1,4 +1,6 @@
-using OcelotApiGateway;
+using Common.Logging;
+using Contracts.Common.Interfaces;
+using Infrastructure.Common;
 using OcelotApiGateway.Extensions;
 using Scalar.AspNetCore;
 using Serilog;
@@ -13,12 +15,14 @@ Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
+    builder.Host.UseSerilog(Serilogger.Configure);
     builder.Configuration.AddAppConfigurations();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.AddOpenApi();
     builder.Services.AddControllers();
     builder.Services.ConfigureOcelot(builder.Configuration);
     builder.Services.ConfigureCors(builder.Configuration);
+    builder.Services.AddTransient<ISerializeService, SerializeService>();
     
     var app = builder.Build();
 

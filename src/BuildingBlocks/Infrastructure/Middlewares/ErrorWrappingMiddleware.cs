@@ -1,7 +1,8 @@
 ﻿using System.Net;
 using Contracts.Common.Interfaces;
+using Microsoft.AspNetCore.Http;
 using ILogger = Serilog.ILogger;
-namespace OcelotApiGateway;
+namespace Infrastructure.Middlewares;
 
 public class ErrorWrappingMiddleware
 {

@@ -1,4 +1,5 @@
-﻿using Ocelot.Middleware;
+﻿using Infrastructure.Middlewares;
+using Ocelot.Middleware;
 
 namespace OcelotApiGateway.Extensions;
 
@@ -16,7 +17,7 @@ public static class ApplicationExtensions
         });
             
         app.UseCors("CorsPolicy");
-        // app.UseMiddleware<ErrorWrappingMiddleware>();
+        app.UseMiddleware<ErrorWrappingMiddleware>();
         app.UseAuthorization();
         app.UseOcelot().Wait();
     }
