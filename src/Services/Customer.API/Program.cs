@@ -1,6 +1,7 @@
 using Common.Logging;
 using Customer.API.Extensions;
 using Customer.API.Services.Interfaces;
+using Scalar.AspNetCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.MapOpenApi();
+        app.MapScalarApiReference();
     }
 
     app.MapGet("/api/customers", 
