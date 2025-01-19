@@ -112,7 +112,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:DefaultConnectionString=Server=productdb;Port=3306;Database=ProductDB;Uid=root;Pwd=Passw0rd!"
     depends_on:
       - productdb
     ports:
@@ -124,7 +123,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:DefaultConnectionString=Server=customerdb;Port=5433;Database=CustomerDb;User Id=admin;Pwd=admin1234"
     depends_on:
       - customerdb
     ports:
