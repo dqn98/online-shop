@@ -14,6 +14,154 @@
           "Port": 5003
         }
       ]
+    },
+    
+    {
+        "UpstreamPathTemplate": "/api/products/{any}",
+        "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+        "DownstreamPathTemplate": "/api/products/{any}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "localhost",
+            "Port": 5002
+            }
+        ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/products",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5002
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/products/get-product-by-no/{any}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/products/get-product-by-no/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5002
+          }
+      ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/baskets/{any}",
+      "UpstreamHttpMethod": [ "Get","Delete" ],
+      "DownstreamPathTemplate": "/api/baskets/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5004
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/baskets",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/baskets",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5004
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/baskets/checkout",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/baskets/checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5004
+          }
+      ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/{version}/orders/{any}",
+      "UpstreamHttpMethod": [ "Get", "Put","Delete" ],
+      "DownstreamPathTemplate": "/api/{version}/orders/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5005
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/{version}/orders",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/{version}/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5005
+          }
+      ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/inventory/items/{any}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/inventory/items/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5006
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/inventory/items/{any}/paging",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/inventory/items/{any}/paging",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5006
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/inventory/{any}",
+      "UpstreamHttpMethod": [ "Get", "Delete"],
+      "DownstreamPathTemplate": "/api/inventory/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5006
+          }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/inventory/purchase/{any}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/inventory/purchase/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+          {
+          "Host": "localhost",
+          "Port": 5006
+          }
+      ]
     }
   ]
-} 
+}
