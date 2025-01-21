@@ -1,4 +1,5 @@
 ﻿using Ocelot.DependencyInjection;
+using Shared.Configurations;
 
 namespace OcelotApiGateway.Extensions;
 
@@ -7,7 +8,6 @@ public static class ServiceExtensions
     internal static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
         IConfiguration configuration)
     {
-        
         return services;
     }
     

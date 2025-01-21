@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Product.API.Entities;
 using Product.API.Repositories.Interfaces;
@@ -47,6 +48,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto productDto)
     {
         if(productDto.No == null) return BadRequest("Product No is required");
@@ -63,10 +65,16 @@ public class ProductController : Controller
     }
 
     [HttpPut("{id:long}")]
+    [Authorize]
     public async Task<IActionResult> UpdateProduct([Required] long id, [FromBody] UpdateProductDto productDto)
     {
         var product = await _productRepository.GetProduct(id);
         var updateProduct = _mapper.Map(productDto, product);
+        if (updateProduct is null)
+        {
+            return NotFound();
+        }
+        
         await _productRepository.UpdateProduct(updateProduct);
         await _productRepository.SaveChangesAsync();
         var result = _mapper.Map<ProductDto>(product);
@@ -74,6 +82,7 @@ public class ProductController : Controller
     }
 
     [HttpDelete("{id:long}")]
+    [Authorize]
     public async Task<IActionResult> DeleteProduct([Required] long id)
     {
         var product = await _productRepository.GetProduct(id);

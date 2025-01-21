@@ -17,7 +17,7 @@ try
     builder.Host.UseSerilog(Serilogger.Configure);
     builder.Services.AddOpenApi();
     builder.Configuration.AddAppConfigurations();
-
+    builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.AddInfrastructure(builder.Configuration);
 
     var app = builder.Build();
@@ -27,7 +27,7 @@ try
         app.MapOpenApi();
         app.MapScalarApiReference();
     }
-
+    
     app.MigrateDatabase<CatalogProductContext>((context, _) =>
     {
         CatalogProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
