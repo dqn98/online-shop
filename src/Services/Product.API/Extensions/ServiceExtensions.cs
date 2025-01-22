@@ -93,13 +93,12 @@ public static class ServiceExtensions
         return services;
     }
 
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>));
         services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         
         services.AddTransient(typeof(IProductRepository), typeof(ProductRepository));
-        services.AddTransient<ITokenService, TokenService>();
         
         return services;
     }

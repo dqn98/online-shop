@@ -31,7 +31,6 @@ try
         app.MapOpenApi();
         app.MapScalarApiReference();
     }
-
     app.UseInfrastructure();
 
     app.Run();
