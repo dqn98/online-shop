@@ -34,8 +34,6 @@ try
 
     app.UseHangfireDashboard(builder.Configuration);
 
-    app.MapGet("/jobs", () => "");
-
     app.Run();
 
 }
