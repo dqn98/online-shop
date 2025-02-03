@@ -4,19 +4,6 @@
   },
   "Routes": [
     {
-      "UpstreamPathTemplate": "/api/token",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/token",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5000
-        }
-      ]
-    },
-    
-    {
       "UpstreamPathTemplate": "/api/customers/{username}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/customers/{username}",
@@ -28,10 +15,9 @@
         }
       ]
     },
-    
     {
         "UpstreamPathTemplate": "/api/products/{any}",
-        "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+        "UpstreamHttpMethod": [ "Get" ],
         "DownstreamPathTemplate": "/api/products/{any}",
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
@@ -40,6 +26,21 @@
             "Port": 5002
             }
         ]
+    }, 
+    {
+      "UpstreamPathTemplate": "/api/products/{any}",
+      "UpstreamHttpMethod": [ "Put", "Delete" ],
+      "DownstreamPathTemplate": "/api/products/{any}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+        "Host": "localhost",
+        "Port": 5002
+        }
+      ],
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
     },
     {
       "UpstreamPathTemplate": "/api/products",
