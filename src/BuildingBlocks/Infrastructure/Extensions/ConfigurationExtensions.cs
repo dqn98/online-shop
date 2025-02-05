@@ -11,7 +11,7 @@ public static class ConfigurationExtensions
     /// <param name="sectionName"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new ()
+    public static T? GetOptions<T>(this IServiceCollection services, string sectionName) where T : new ()
     {
         using var serviceProvider = services.BuildServiceProvider();
         var configuration = serviceProvider.GetRequiredService<IConfiguration>();
