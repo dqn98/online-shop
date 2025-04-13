@@ -1,6 +1,6 @@
 ﻿using Ordering.Application.Common.Mapping;
 using Ordering.Domain.Entities;
-using Ordering.Domain.Enums;
+using Shared.Enums.Order;
 
 namespace Ordering.Application.Common.Models;
 
