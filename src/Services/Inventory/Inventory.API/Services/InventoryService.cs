@@ -75,4 +75,31 @@ public class InventoryService : MongoDbRepository<InventoryEntry>, IInventorySer
         var result = _mapper.Map<InventoryEntryDto>(entity);
         return result;
     }
+
+    public async Task<InventoryEntryDto> SalesItemAsync(string itemNo, SalesProductDto model, CancellationToken cancellationToken)
+    {
+        var itemToAdd = new InventoryEntry(ObjectId.GenerateNewId().ToString())
+        {
+            Quantity = model.Quantity * -1,
+            ItemNo = model.ItemNo ?? string.Empty,
+            DocumentType = model.DocumentType,
+            ExternalDocumentNo = model.ExternalDocumentNo ?? string.Empty,
+        };
+        
+        var entity = _mapper.Map<InventoryEntry>(itemToAdd);
+        
+        await CreateAsync(entity, cancellationToken);
+        var result = _mapper.Map<InventoryEntryDto>(entity);
+        
+        return result;
+    }
+
+    public async Task DeleteByDocumentNo(string documentNo)
+    { 
+        var filter = Builders<InventoryEntry>.Filter.Eq(x => x.DocumentNo, documentNo);
+        if (filter != null)
+        {   
+            await Collection.DeleteOneAsync(filter);
+        }
+    }
 }
