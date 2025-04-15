@@ -8,7 +8,7 @@ using ILogger = Serilog.ILogger;
 
 namespace Saga.Orchestrator.Services;
 
-public class CheckoutService : ICheckoutService
+public class CheckoutSagaService : ICheckoutSagaService
 {
     private readonly IOrderHttpRepository _orderHttpRepository;
     private readonly IBasketHttpRepository _basketHttpRepository;
@@ -16,7 +16,7 @@ public class CheckoutService : ICheckoutService
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
 
-    public CheckoutService(
+    public CheckoutSagaService(
         IOrderHttpRepository orderHttpRepository,
         IBasketHttpRepository basketHttpRepository,
         IInventoryHttpRepository inventoryHttpRepository,
@@ -60,8 +60,18 @@ public class CheckoutService : ICheckoutService
             _logger.Error("Error: Order creation failed");
             return false;
         }
+        
         var addedOrder = await _orderHttpRepository.GetOrder(orderId);
-        _logger.Information("Information: Created order successfully, orderId: {OrderId} - DocumentNo: {addedOrder.DocumentNo}", orderId);
+
+        if (addedOrder == null)
+        {
+            _logger.Error("Error: Can not get order");
+            return false;
+        }
+        
+        _logger.Information("Information: Created order successfully, orderId: {OrderId} - DocumentNo: {DocumentNo}", 
+            orderId, addedOrder.DocumentNo);
+        
         bool result = false;
         var inventoryDocumentNos = new List<string>();
         try
@@ -75,24 +85,41 @@ public class CheckoutService : ICheckoutService
                 saleOrder.SetItemNo(item.ItemNo);
                 
                 var documentNo = await _inventoryHttpRepository.CreateSalesOrder(saleOrder);
-                inventoryDocumentNos.Add(documentNo);
+                if (!string.IsNullOrWhiteSpace(documentNo))
+                {
+                    inventoryDocumentNos.Add(documentNo);
+                }
                 
                 _logger.Information($"End: Sale item {item.ItemNo} - DocumentNo: {addedOrder.DocumentNo} - Quantity: {item.Quantity} from inventoryHttpRepository successfully");
             }
 
-            result = true;
+            result = await _basketHttpRepository.DeleteBasket(username);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Error: Order creation failed. RollBackCheckoutOrder");
-
+            // Rollback order
+            
+            await RollBackCheckoutOrder(username, addedOrder.Id, inventoryDocumentNos);
             result = false;
         }
         return result;
     }
 
-    public async Task RollBackCheckoutOrder(string username, long orderId, List<string> inventoryDocumentNos)
+    private async Task RollBackCheckoutOrder(string username, long orderId, List<string> inventoryDocumentNos)
     {
+        _logger.Information($"Start: RollBackCheckoutOrder - Username: {username} - OrderId: {orderId}, DocumentNos: {string.Join(", ", inventoryDocumentNos)}");
         
+        // Delete order by orderId
+        var deletedDocumentNos = new List<string>();
+        foreach (var documentNo in inventoryDocumentNos)
+        {
+            _logger.Information($"Start: Rollback order - DocumentNo: {documentNo}");
+            await _inventoryHttpRepository.DeleteOrderByDocumentNo(documentNo);
+            deletedDocumentNos.Add(documentNo);
+            _logger.Information($"End: Rollback order - DocumentNo: {documentNo} successfully");
+        }
+        
+        _logger.Information($"End: Rollback order - DocumentNos: {string.Join(", ", deletedDocumentNos)} successfully");
     }
 }

@@ -4,8 +4,8 @@ namespace Shared.DTOs.Order;
 
 public class OrderDto
 {
+    public long Id { get; set; }
     public required string UserName { get; set; }
-    
     public required string DocumentNo { get; set; } = Guid.NewGuid().ToString();
 
     public required decimal TotalPrice { get; set; }
