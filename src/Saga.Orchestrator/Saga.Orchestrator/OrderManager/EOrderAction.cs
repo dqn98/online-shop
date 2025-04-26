@@ -5,6 +5,7 @@ public enum EOrderAction
     GetBasket,
     CreateOrder,
     GetOrder,
+    DeleteOrder,
     DeleteBasket,
     UpdateInventory,
     DeleteInventory,
