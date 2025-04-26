@@ -14,6 +14,7 @@ Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
+    builder.Host.UseSerilog(Serilogger.Configure);
     builder.Configuration.AddAppConfigurations();
     builder.Services.AddOpenApi();
     builder.Services.AddControllers();

@@ -11,7 +11,12 @@ public abstract class CreateOrUpdateCommand : IMapFrom<Order>
     public string? LastName { get; set; }
     public string? EmailAddress { get; set; }
     public string? ShippingAddress { get; set; }
-    public string? InvoiceAddress { get; set; }
+    private string? _invoiceAddress;
+    public string? InvoiceAddress 
+    {
+        get => _invoiceAddress;
+        set => _invoiceAddress = string.IsNullOrWhiteSpace(value) ? ShippingAddress : value;
+    }
 
     protected class Mapping : Profile
     {

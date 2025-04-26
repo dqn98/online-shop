@@ -7,7 +7,7 @@ using Ordering.Domain.Entities;
 using Serilog;
 using Shared.SeedWork;
 
-namespace Ordering.Application.Features.V1.Orders.Commands.UpdateOrder;
+namespace Ordering.Application.Features.V1.Orders;
 
 public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, ApiResult<OrderDto>>
 {

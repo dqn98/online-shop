@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ordering.Application.Features.V1.Orders.Commands.UpdateOrder;
+namespace Ordering.Application.Features.V1.Orders;
 
 public class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderCommand>
 {

@@ -20,12 +20,6 @@ public class InventoryController : ControllerBase
         _inventoryService = inventoryService;
     }
     
-    /// <summary>
-    /// api/inventory/items/{itemNo}
-    /// </summary>
-    /// <param name="itemNo"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     [Route("items/{itemNo}", Name = "GetAllByItemNo")]
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<InventoryEntryDto>), (int)HttpStatusCode.OK)]
@@ -35,12 +29,6 @@ public class InventoryController : ControllerBase
         return Ok(result);
     }    
     
-    /// <summary>
-    /// api/inventory/items/{itemNo}/paging
-    /// </summary>
-    /// <param name="itemNo"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     [Route("items/{itemNo}/paging", Name = "GetAllByItemNoPaging")]
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<InventoryEntryDto>), (int)HttpStatusCode.OK)]
@@ -54,12 +42,6 @@ public class InventoryController : ControllerBase
         return Ok(result);
     }   
     
-    /// <summary>
-    /// api/inventory/{id}
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     [Route("{id}", Name = "GetInventoryById")]
     [HttpGet]
     [ProducesResponseType(typeof(InventoryEntryDto), (int)HttpStatusCode.OK)]
@@ -69,13 +51,6 @@ public class InventoryController : ControllerBase
         return Ok(result);
     }
     
-    /// <summary>
-    /// api/inventory/purchase/{itemNo}
-    /// </summary>
-    /// <param name="itemNo"></param>
-    /// <param name="model"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     [Route("purchase/{itemNo}", Name = "PurchaseOrder")]
     [HttpPost]
     [ProducesResponseType(typeof(InventoryEntryDto), (int)HttpStatusCode.OK)]
@@ -85,6 +60,33 @@ public class InventoryController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _inventoryService.PurchaseItemAsync(itemNo, model, cancellationToken);
+        return Ok(result);
+    }
+    
+    [Route("sales/{itemNo}", Name = "SalesItem")]
+    [HttpPost]
+    [ProducesResponseType(typeof(InventoryEntryDto), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<InventoryEntryDto>> SalesItem(
+        [Required] string itemNo, 
+        [FromBody] SalesProductDto model,
+        CancellationToken cancellationToken)
+    {
+        model.SetItemNo(itemNo);
+        var result = await _inventoryService.SalesItemAsync(itemNo, model, cancellationToken);
+        return Ok(result);
+    }
+    
+        
+    [Route("sales/order-no/{orderNo}", Name = "SalesOrder")]
+    [HttpPost]
+    [ProducesResponseType(typeof(CreatedSalesOrderSuccessDto), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<InventoryEntryDto>> SalesOrder(
+        [Required] string orderNo, 
+        [FromBody] SalesOrderDto model)
+    {
+        model.OrderNo = orderNo;
+        var documentNo = await _inventoryService.SaleOrderAsync(model);
+        var result = new CreatedSalesOrderSuccessDto(documentNo);
         return Ok(result);
     }
     

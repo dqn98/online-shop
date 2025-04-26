@@ -6,7 +6,7 @@ using Ordering.Application.Common.Models;
 using Ordering.Domain.Entities;
 using Shared.SeedWork;
 
-namespace Ordering.Application.Features.V1.Orders.Commands.UpdateOrder;
+namespace Ordering.Application.Features.V1.Orders;
 
 public class UpdateOrderCommand : CreateOrUpdateCommand, IRequest<ApiResult<OrderDto>>, IMapFrom<Order>
 {
