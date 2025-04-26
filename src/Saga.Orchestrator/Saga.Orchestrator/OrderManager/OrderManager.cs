@@ -119,15 +119,33 @@ public class OrderManager : ISagaOrderManager<BasketCheckoutDto, OrderResponse>
             {
                 RollbackOrder(input.GetUserName(), inventoryDocumentNo, orderId);
                 return EOrderTransactionState.InventoryRollback;
-            });
+            }).OnEntry(() => orderStateMachine.Fire(EOrderAction.DeleteInventory));
         
         orderStateMachine.Fire(EOrderAction.GetBasket);
         
-        return new OrderResponse(orderStateMachine.State == EOrderTransactionState.InventoryUpdated);
+        return new OrderResponse(orderStateMachine.State == EOrderTransactionState.BasketDeleted);
     }
 
     public OrderResponse RollbackOrder(string username, string documentNo, long orderId)
     {
-        return new OrderResponse(true);
+        var orderStateMachine =
+            new Stateless.StateMachine<EOrderTransactionState, EOrderAction>(EOrderTransactionState.RollbackInventory);
+
+        orderStateMachine.Configure(EOrderTransactionState.RollbackInventory)
+            .PermitDynamic(EOrderAction.DeleteInventory, () =>
+            {
+                _inventoryHttpRepository.DeleteOrderByDocumentNo(documentNo);
+                return EOrderTransactionState.InventoryRollback;
+            });
+        
+        orderStateMachine.Configure(EOrderTransactionState.InventoryRollback)
+            .PermitDynamic(EOrderAction.DeleteOrder, () =>
+            {
+                var result = _orderHttpRepository.DeleteOrder(orderId).Result;
+                return result ? EOrderTransactionState.InventoryRollback : EOrderTransactionState.OrderDeleteFailed;
+            }).OnEntry(() => orderStateMachine.Fire(EOrderAction.DeleteOrder));
+        
+        orderStateMachine.Fire(EOrderAction.DeleteInventory);
+        return new OrderResponse(orderStateMachine.State == EOrderTransactionState.InventoryRollback);
     }
 }

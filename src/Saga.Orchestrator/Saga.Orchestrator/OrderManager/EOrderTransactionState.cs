@@ -9,7 +9,7 @@ public enum EOrderTransactionState
     OrderCreated,
     OrderCreateFailed,
     OrderDeleted,
-    OrderDeletedFailed,
+    OrderDeleteFailed,
     OrderGot,
     OrderGetFailed,
     InventoryUpdated,
