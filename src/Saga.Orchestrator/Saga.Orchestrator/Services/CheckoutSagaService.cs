@@ -110,6 +110,10 @@ public class CheckoutSagaService : ICheckoutSagaService
     {
         _logger.Information($"Start: RollBackCheckoutOrder - Username: {username} - OrderId: {orderId}, DocumentNos: {string.Join(", ", inventoryDocumentNos)}");
         
+        _logger.Information($"Start: Delete order - OrderId: {orderId}");
+        await _orderHttpRepository.DeleteOrder(orderId);
+        _logger.Information($"End: Delete order - OrderId: {orderId} successfully");
+        
         // Delete order by orderId
         var deletedDocumentNos = new List<string>();
         foreach (var documentNo in inventoryDocumentNos)

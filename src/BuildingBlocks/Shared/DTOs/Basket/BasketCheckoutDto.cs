@@ -4,12 +4,14 @@ public class BasketCheckoutDto
 {
     private string? _invoiceAddress;
 
-    public string? GetUserName() => _userName;
+    public string GetUserName() => _userName;
 
-    private string? _userName;
+    private string _userName = string.Empty;
 
     public void SetUserName(string username)
     {
+        if (string.IsNullOrEmpty(username))
+            throw new ArgumentException("Username cannot be null or empty.", nameof(username));
         _userName = username;
     }
 

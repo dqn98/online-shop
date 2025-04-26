@@ -5,6 +5,8 @@ using Shared.DTOs.Basket;
 
 namespace Saga.Orchestrator.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class CheckoutController : Controller
 {
     private readonly ICheckoutSagaService _checkoutSagaService;

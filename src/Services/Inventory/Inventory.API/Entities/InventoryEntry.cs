@@ -27,7 +27,7 @@ public class InventoryEntry : MongoEntity
     public string ItemNo { get; set; }
     
     [BsonElement("quantity")]
-    public double Quantity { get; set; }
+    public decimal Quantity { get; set; }
     
     [BsonElement("externalDocumentNo")]
     public string ExternalDocumentNo { get; set; }
